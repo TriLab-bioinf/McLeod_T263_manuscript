@@ -21,6 +21,10 @@ my %arg = @ARGV;
 die $usage unless ($arg{-r} && $arg{-o} && $arg{-R} && $arg{-A});
 
 $filter = $arg{-F} if $arg{-F};
+
+# tggt1_names.txt and tga4_com_name file below are tab-delimited files with the following two columns:
+# gene_id <TAB> gene_name
+
 my %annotation = (	"GT1" => "/usr/local/projdata/700030/projects/GCID_PARASITES/KATIE_CLONES/tggt1_names.txt",
 			"ME49" => "/usr/local/devel/ANNOTATION/hlorenzi/snpEff/data/ToxoDB-13.0_TgondiiME49/tga4_com_name");
 my $annotation_file = $annotation{ $arg{-A} }? $annotation{ $arg{-A} } : $arg{-A};
@@ -101,6 +105,8 @@ my $CMD = "$bcftools filter $filter $p.mpileup.vcf > $p.mpileup.filter.vcf";
 &print_stderr ("## Running bcftools filter on $p.mpileup.vcf",$CMD) unless (-e "$p.mpileup.filter.vcf");
 
 ## snpEff
+
+# $ref stores the name of the snpEff annotation database for the reference genome
 my $ref = $arg{-A} eq "GT1" ? "gt1_genome_w_RH_api" : $arg{-A} eq "ME49" ? "ToxoDB-13.0_TgondiiME49" : "OTHER";
 if ($ref eq "OTHER" ){
 	print STDERR "No available library for $arg{-A}. SnpEff will not run\n\n";
