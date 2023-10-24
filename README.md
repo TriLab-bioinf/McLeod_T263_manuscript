@@ -9,4 +9,7 @@ call_snps_pipeline_manuscript.pl
 
 # Auxiliary script
 summarize_coding_snps_v2.pl
+
+# Tabulated file with SNPs identified across all T. gondii strains
+SNPs_all_Tgondii_strains.txt
 ```
